@@ -33,3 +33,15 @@ class BaseCommand:
 
     def action(self):
         raise NotImplementedError
+
+
+class MuteCommand(BaseCommand):
+    def __init__(self):
+        super().__init__(
+            valid_labels=["Putting finger to mouth"],
+            threshold=0.9,
+            cooldown=2
+        )
+
+    def action(self):
+        print("MUTE!")
