@@ -1,6 +1,9 @@
+from typing import List
+
 import cv2 as cv2
 import numpy as np
 
+import gesture_commands
 from realtimenet import camera
 from realtimenet import engine
 from realtimenet import feature_extractors
@@ -14,12 +17,13 @@ class GestureController:
     feature_extractor_weights = 'resources/backbone/strided_inflated_efficientnet.ckpt'
     gesture_classifier_weights = 'resources/gesture_detection/efficientnet_logistic_regression.ckpt'
 
-    def __init__(self):
+    def __init__(self, commands: List[gesture_commands.BaseCommand]):
         # Initialize attributes
         self.net = None
         self.inference_engine = None
         self.frame_grabber = None
         self.postprocessors = None
+        self.commands = commands
 
         self.setup_inference()
 
@@ -96,6 +100,9 @@ class GestureController:
                     post_processed_data.update(post_processor(prediction))
 
                 print(post_processed_data)
+
+                for command in self.commands:
+                    command(post_processed_data)
 
             # Press escape to exit
             except KeyboardInterrupt:
