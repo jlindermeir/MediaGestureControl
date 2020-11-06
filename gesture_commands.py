@@ -5,6 +5,7 @@ from typing import Optional
 from typing import Tuple
 
 import numpy as np
+from playerdo.main import find_players, do_command
 
 
 class BaseCommand:
@@ -27,21 +28,44 @@ class BaseCommand:
             if t[0] in self.valid_labels
         ])
 
+        print(f'{str(self)}: {score}')
+
         if score >= self.threshold:
             self.last_triggered = now
+            print(f'{str(self)} triggered!')
             self.action()
 
     def action(self):
         raise NotImplementedError
 
 
-class MuteCommand(BaseCommand):
+class PlayerDoCommand(BaseCommand):
+    def __init__(self, command, **kwargs):
+        super().__init__(**kwargs)
+        self.command = command
+
+    def action(self):
+        do_command(self.command, find_players())
+
+    def __str__(self):
+        return f'"{self.command}" command'
+
+
+class UnpauseCommand(PlayerDoCommand):
     def __init__(self):
         super().__init__(
-            valid_labels=["Putting finger to mouth"],
-            threshold=0.9,
+            command='unpause',
+            valid_labels=['Nodding', 'Thumb up'],
+            threshold=0.8,
             cooldown=2
         )
 
-    def action(self):
-        print("MUTE!")
+
+class MuteCommand(PlayerDoCommand):
+    def __init__(self):
+        super().__init__(
+            command='pause',
+            valid_labels=["Putting finger to mouth"],
+            threshold=0.8,
+            cooldown=2
+        )

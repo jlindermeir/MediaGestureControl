@@ -99,8 +99,6 @@ class GestureController:
                 for post_processor in self.postprocessors:
                     post_processed_data.update(post_processor(prediction))
 
-                print(post_processed_data)
-
                 for command in self.commands:
                     command(post_processed_data)
 
