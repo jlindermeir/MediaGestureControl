@@ -1,4 +1,4 @@
-#MediaGestureControl
+# MediaGestureControl
 Control any media playback simply by using gestures!
 The gesture recognition is provided by [20bn-realtimenet](https://github.com/TwentyBN/20bn-realtimenet) 
 and [player_do](https://pypi.org/project/playerdo/) is used to communicate with the media player.
