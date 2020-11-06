@@ -3,7 +3,7 @@ from typing import List
 import cv2 as cv2
 import numpy as np
 
-import gesture_commands
+from gesture_controller.commands import BaseCommand
 from realtimenet import camera
 from realtimenet import engine
 from realtimenet import feature_extractors
@@ -17,7 +17,7 @@ class GestureController:
     feature_extractor_weights = 'resources/backbone/strided_inflated_efficientnet.ckpt'
     gesture_classifier_weights = 'resources/gesture_detection/efficientnet_logistic_regression.ckpt'
 
-    def __init__(self, commands: List[gesture_commands.BaseCommand]):
+    def __init__(self, commands: List[BaseCommand]):
         # Initialize attributes
         self.net = None
         self.inference_engine = None
@@ -64,7 +64,6 @@ class GestureController:
         clip = np.random.randn(1, self.inference_engine.step_size, self.inference_engine.expected_frame_size[0],
                                self.inference_engine.expected_frame_size[1], 3)
         frame_index = 0
-        display_error = None
 
         # Start threads
         self.inference_engine.start()

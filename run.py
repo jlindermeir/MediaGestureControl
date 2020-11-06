@@ -1,5 +1,5 @@
-from gesture_commands import ALL_COMMANDS
-from gesture_controller import GestureController
+from gesture_controller.commands import ALL_COMMANDS
+from gesture_controller.controller import GestureController
 
 gesture_contoller = GestureController(
     commands=[c() for c in ALL_COMMANDS]
