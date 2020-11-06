@@ -22,7 +22,7 @@ class BaseCommand:
 
         prediction_tuples = predictions['sorted_predictions']
 
-        score = np.mean([
+        score = np.sum([
             t[1] for t in prediction_tuples
             if t[0] in self.valid_labels
         ])
