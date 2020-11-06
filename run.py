@@ -1,11 +1,7 @@
-from gesture_commands import UnpauseCommand
+from gesture_commands import ALL_COMMANDS
 from gesture_controller import GestureController
-from gesture_commands import MuteCommand
 
 gesture_contoller = GestureController(
-    commands=[
-        UnpauseCommand(),
-        MuteCommand()
-    ]
+    commands=[c() for c in ALL_COMMANDS]
 )
 gesture_contoller.run_inference()

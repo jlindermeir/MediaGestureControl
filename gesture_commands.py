@@ -65,3 +65,26 @@ class MuteCommand(PlayerDoCommand):
             command='pause',
             valid_labels=["Putting finger to mouth"]
         )
+
+
+class NextCommand(PlayerDoCommand):
+    def __init__(self):
+        super().__init__(
+            command='next',
+            valid_labels=["Pointing left", "Swiping left"],
+            threshold=0.7,
+            cooldown=1
+        )
+
+
+class PrevCommand(PlayerDoCommand):
+    def __init__(self):
+        super().__init__(
+            command='prev',
+            valid_labels=["Pointing right", "Swiping right"],
+            threshold=0.7,
+            cooldown=1
+        )
+
+
+ALL_COMMANDS = [UnpauseCommand, MuteCommand, PrevCommand, NextCommand]
