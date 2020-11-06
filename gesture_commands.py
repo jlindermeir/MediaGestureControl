@@ -9,7 +9,7 @@ from playerdo.main import find_players, do_command
 
 
 class BaseCommand:
-    def __init__(self, valid_labels: List[str], threshold: float, cooldown: Optional[int] = None):
+    def __init__(self, valid_labels: List[str], threshold: float, cooldown: Optional[float] = None):
         self.valid_labels = valid_labels
         self.threshold = threshold
         self.cooldown = cooldown or 0
@@ -40,8 +40,8 @@ class BaseCommand:
 
 
 class PlayerDoCommand(BaseCommand):
-    def __init__(self, command, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, command: str, threshold: float = 0.8, cooldown: Optional[float] = 2, **kwargs):
+        super().__init__(threshold=threshold, cooldown=cooldown, **kwargs)
         self.command = command
 
     def action(self):
@@ -55,9 +55,7 @@ class UnpauseCommand(PlayerDoCommand):
     def __init__(self):
         super().__init__(
             command='unpause',
-            valid_labels=['Nodding', 'Thumb up'],
-            threshold=0.8,
-            cooldown=2
+            valid_labels=['Nodding', 'Thumb up']
         )
 
 
@@ -65,7 +63,5 @@ class MuteCommand(PlayerDoCommand):
     def __init__(self):
         super().__init__(
             command='pause',
-            valid_labels=["Putting finger to mouth"],
-            threshold=0.8,
-            cooldown=2
+            valid_labels=["Putting finger to mouth"]
         )
