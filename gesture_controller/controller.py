@@ -28,7 +28,7 @@ class GestureController:
         self.setup_inference()
 
     def setup_inference(self):
-        print("Setting up the inference")
+        print("Setting up inference")
         self._load_net()
         self._setup_inference_engine()
         self._setup_post_processor()

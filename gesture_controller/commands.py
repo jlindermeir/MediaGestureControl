@@ -28,8 +28,6 @@ class BaseCommand:
             if t[0] in self.valid_labels
         ])
 
-        print(f'{str(self)}: {score}')
-
         if score >= self.threshold:
             self.last_triggered = now
             print(f'{str(self)} triggered!')
