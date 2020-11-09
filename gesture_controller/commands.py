@@ -43,7 +43,11 @@ class PlayerDoCommand(BaseCommand):
         self.command = command
 
     def action(self):
-        do_command(self.command, find_players())
+        try:
+            do_command(self.command, find_players())
+        except SystemExit:
+            # Prevent do_command from exiting in case no player is detected
+            pass
 
     def __str__(self):
         return f'"{self.command}" command'
