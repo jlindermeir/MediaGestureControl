@@ -74,8 +74,8 @@ class NextCommand(PlayerDoCommand):
         super().__init__(
             command='next',
             valid_labels=["Pointing left", "Swiping left"],
-            threshold=0.7,
-            cooldown=1
+            threshold=0.6,
+            cooldown=2
         )
 
 
@@ -84,8 +84,8 @@ class PrevCommand(PlayerDoCommand):
         super().__init__(
             command='prev',
             valid_labels=["Pointing right", "Swiping right"],
-            threshold=0.7,
-            cooldown=1
+            threshold=0.6,
+            cooldown=2
         )
 
 
