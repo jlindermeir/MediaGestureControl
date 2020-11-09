@@ -1,6 +1,5 @@
 from typing import List
 
-import cv2 as cv2
 import numpy as np
 
 from gesture_controller.commands import BaseCommand
