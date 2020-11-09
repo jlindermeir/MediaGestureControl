@@ -60,15 +60,12 @@ class GestureController:
         ]
 
     def run_inference(self):
-        print("Starting inference")
         clip = np.random.randn(1, self.inference_engine.step_size, self.inference_engine.expected_frame_size[0],
                                self.inference_engine.expected_frame_size[1], 3)
+
         frame_index = 0
 
-        # Start threads
-        self.inference_engine.start()
-        self.frame_grabber.start()
-
+        self._start_inference()
         while True:
             try:
                 frame_index += 1
@@ -100,11 +97,17 @@ class GestureController:
 
                 self._apply_commands(post_processed_data)
 
-            # Press escape to exit
             except KeyboardInterrupt:
                 break
-        # Clean up
-        cv2.destroyAllWindows()
+        self._stop_inference()
+
+    def _start_inference(self):
+        print("Starting inference")
+        self.inference_engine.start()
+        self.frame_grabber.start()
+
+    def _stop_inference(self):
+        print("Stopping inference")
         self.frame_grabber.stop()
         self.inference_engine.stop()
 
