@@ -98,8 +98,7 @@ class GestureController:
                 for post_processor in self.postprocessors:
                     post_processed_data.update(post_processor(prediction))
 
-                for command in self.commands:
-                    command(post_processed_data)
+                self._apply_commands(post_processed_data)
 
             # Press escape to exit
             except KeyboardInterrupt:
@@ -108,3 +107,7 @@ class GestureController:
         cv2.destroyAllWindows()
         self.frame_grabber.stop()
         self.inference_engine.stop()
+
+    def _apply_commands(self, data):
+        for command in self.commands:
+            command(data)
