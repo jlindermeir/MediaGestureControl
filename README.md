@@ -7,7 +7,7 @@ Tested on Ubuntu 20.04.1 for Spotify and Chrome playing YouTube.
 
 ## Installation
 The script assumes that [20bn-realtimenet](https://github.com/TwentyBN/20bn-realtimenet) is cloned and correctly 
-installed in the folder beside the one contains this repository. The structure should look like this:
+installed in the folder beside this repository. The structure should look like this:
 ```
 <your_project_folder>
 ├── MediaGestureControl
