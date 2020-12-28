@@ -85,7 +85,7 @@ class GestureController:
                     # A new clip is ready
                     self.inference_engine.put_nowait(clip)
 
-                frame_index = frame_index % self.inference_engine.step_size
+                frame_index %= self.inference_engine.step_size
 
                 # Get predictions
                 prediction = self.inference_engine.get_nowait()
